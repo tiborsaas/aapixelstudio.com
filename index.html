@@ -51,19 +51,52 @@
       max-width: 600px;
       width: 100%;
       margin-bottom: 1rem;
+      cursor: pointer;
     }
 
     .by {
       font-size: 0.9rem;
     }
+
+    iframe {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .party .p {
+      mix-blend-mode: multiply;
+    }
   </style>
 </head>
 
 <body>
+
   <img src="./assets/logo.jpeg" class="logo" />
-  <p>Hamarosan&hellip;</p>
+  <p class="title">Hamarosan&hellip;</p>
   <img src="./assets/f72c4353-8bfb-4a16-b4e9-65d9295fae98.jpeg" class="p" />
   <p class="by">Powered by Szász Tibi</p>
+  <div id="go"></div>
+
+  <script>
+    const vid = `<iframe width="560" height="315" src="https://www.youtube.com/embed/J0YZQNgkf9Y?si=7_TCLK2gs5lLCw09&autoplay=1"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+
+    const btn = document.querySelector('.p');
+    btn.addEventListener('click', () => {
+      document.querySelector('.logo').style.display = 'none';
+      document.querySelector('#go').innerHTML = vid;
+      document.querySelector('.title').innerHTML = "Boldog Születésnapot";
+      document.body.classList.add('party');
+    })
+  </script>
+
+
 </body>
 
 </html>

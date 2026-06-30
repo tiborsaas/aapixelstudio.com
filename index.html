@@ -1,47 +1,68 @@
 <!DOCTYPE html>
 <html lang="hu">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AA Pixel Studio</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
 
-      body {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        background: #fff;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        color: #111;
-        text-align: center;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AA Pixel Studio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-      h1 {
-        font-size: 2rem;
-        font-weight: 100;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        margin-bottom: 0.5rem;
-      }
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: #fff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      color: #111;
+      text-align: center;
+    }
 
-      p {
-        font-size: 0.9rem;
-        font-weight: 300;
-        letter-spacing: 0.15em;
-        color: #666;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <h1>AA Pixel Studio</h1>
-      <p>Hamarosan&hellip;</p>
-    </div>
-  </body>
+    h1 {
+      font-size: 2rem;
+      font-weight: 100;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      width: 150px;
+      margin-bottom: 1rem;
+    }
+
+    .p {
+      border-radius: 1rem;
+      max-width: 600px;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .by {
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./assets/logo.jpeg" class="logo" />
+  <p>Hamarosan&hellip;</p>
+  <img src="./assets/f72c4353-8bfb-4a16-b4e9-65d9295fae98.jpeg" class="p" />
+  <p class="by">Powered by Szász Tibi</p>
+</body>
+
 </html>

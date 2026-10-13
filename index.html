@@ -1,102 +1,316 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hu">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AA Pixel Studio</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      background: #fff;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #111;
-      padding: 1rem;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2rem;
-      font-weight: 100;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-
-    p {
-      font-size: 1.3rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      color: #666;
-      margin-bottom: 1rem;
-    }
-
-    .logo {
-      width: 150px;
-      margin-bottom: 1rem;
-    }
-
-    .p {
-      border-radius: 1rem;
-      max-width: 600px;
-      width: 100%;
-      margin-bottom: 1rem;
-      cursor: pointer;
-    }
-
-    .by {
-      font-size: 0.9rem;
-    }
-
-    iframe {
-      position: fixed;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
-
-    .party .p {
-      mix-blend-mode: multiply;
-    }
-  </style>
+  <title>ÁA Pixel Stúdió – Arculatok, amelyek túlmutatnak a logón</title>
+  <meta name="description"
+    content="Egységes vizuális rendszerek rendezvényeknek, sporteseményeknek és vállalati projekteknek. Brand, Print & Digitális Design." />
+  <link rel="icon" type="image/png" href="/favicon.svg" />
+  <meta name="theme-color" content="#0d0814" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Manrope:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
 </head>
 
 <body>
+  <!-- Generative Wave Canvas Background -->
+  <div id="hullam-canvas-container" class="hullam-container" aria-hidden="true">
+    <canvas id="hullam-canvas"></canvas>
+  </div>
 
-  <img src="./assets/logo.jpeg" class="logo" />
-  <p class="title">Hamarosan&hellip;</p>
-  <img src="./assets/f72c4353-8bfb-4a16-b4e9-65d9295fae98.jpeg" class="p" />
-  <p class="by">Powered by Szász Tibi</p>
-  <div id="go"></div>
+  <!-- Interactive Ambient Glows -->
+  <div class="ambient-glow glow-top" aria-hidden="true"></div>
+  <div class="ambient-glow glow-bottom" aria-hidden="true"></div>
 
-  <script>
-    const vid = `<iframe width="560" height="315" src="https://www.youtube.com/embed/J0YZQNgkf9Y?si=7_TCLK2gs5lLCw09&autoplay=1"
-    title="YouTube video player" frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+  <!-- Navigation Header -->
+  <header class="site-header" id="header">
+    <div class="header-inner container">
+      <nav class="desktop-nav" aria-label="Fő navigáció">
+        <ul class="nav-links">
+          <li><a href="#filozofia" class="nav-link">Filozófia</a></li>
+          <li class="nav-separator" aria-hidden="true">|</li>
+          <li><a href="#szolgaltatasok" class="nav-link">Szolgáltatások</a></li>
+          <li class="nav-separator" aria-hidden="true">|</li>
+          <li><a href="#rolam" class="nav-link">Rólam</a></li>
+          <li class="nav-separator" aria-hidden="true">|</li>
+          <li><a href="#projektek" class="nav-link">Projektek</a></li>
+          <li class="nav-separator" aria-hidden="true">|</li>
+          <li><a href="#kapcsolat" class="nav-link">Kapcsolat</a></li>
+        </ul>
+      </nav>
 
-    const btn = document.querySelector('.p');
-    btn.addEventListener('click', () => {
-      document.querySelector('.logo').style.display = 'none';
-      document.querySelector('#go').innerHTML = vid;
-      document.querySelector('.title').innerHTML = "Boldog Születésnapot";
-      document.body.classList.add('party');
-    })
-  </script>
+      <div class="header-actions">
+        <button id="mobile-menu-toggle" class="mobile-toggle" aria-label="Menü megnyitása" aria-expanded="false">
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+          <span class="toggle-bar"></span>
+        </button>
+      </div>
+    </div>
 
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+      <div class="drawer-backdrop"></div>
+      <nav class="drawer-menu">
+        <a href="#hero" class="drawer-link">Kezdőlap</a>
+        <a href="#filozofia" class="drawer-link">Filozófia</a>
+        <a href="#szolgaltatasok" class="drawer-link">Szolgáltatások</a>
+        <a href="#rolam" class="drawer-link">Rólam</a>
+        <a href="#projektek" class="drawer-link">Projektek</a>
+        <a href="#kapcsolat" class="drawer-link">Kapcsolat</a>
+      </nav>
+    </div>
+  </header>
 
+  <main id="main-content">
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="container hero-container">
+        <div class="hero-brand-card">
+          <div class="logo-wrapper">
+            <img id="hero-logo-img" class="hero-logo-asset" alt="ÁA Pixel Stúdió Logó" width="360" height="360" />
+            <img id="hero-feather-img" class="hero-feather-asset floating-feather" alt="Dekoratív arculati toll"
+              width="180" height="180" />
+          </div>
+        </div>
+
+        <div class="hero-divider" aria-hidden="true"></div>
+
+        <div class="hero-content">
+          <h1 class="hero-title">ÁA Pixel Stúdió</h1>
+          <p class="hero-tagline">Arculatok, amelyek túlmutatnak a logón.</p>
+          <p class="hero-description">
+            Egységes vizuális rendszerek rendezvényeknek, sporteseményeknek és vállalati projekteknek.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#projektek" class="btn btn-primary">
+              <span>Referenciák megtekintése</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILOZÓFIA SECTION -->
+    <section id="filozofia" class="section filozofia-section">
+      <div class="container filozofia-container">
+        <div class="filozofia-content">
+          <h2 class="section-title serif-title">Filozófia</h2>
+          <p class="filozofia-text">
+            Hiszek abban, hogy egy jól megtervezett arculat jóval többet jelent
+            egy logónál. Akkor válik igazán emlékezetessé, amikor a legapróbb
+            részletekben is következetesen jelen van.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SZOLGÁLTATÁSOK SECTION -->
+    <section id="szolgaltatasok" class="section szolgaltatasok-section">
+      <div class="container szolgaltatasok-container">
+        <div class="section-header-centered">
+          <div class="feather-accent-wrap">
+            <img id="services-feather-top" class="feather-accent-top floating-feather-alt" alt="" width="90"
+              height="90" />
+          </div>
+          <h2 class="section-title serif-title">Szolgáltatások</h2>
+        </div>
+
+        <div class="services-grid">
+          <!-- Card 1 -->
+          <div class="service-card" data-tilt>
+            <h3 class="service-title">Brand & Event Design</h3>
+            <div class="card-accent-line"></div>
+            <p class="service-desc">
+              Komplett vizuális arculatok rendezvényekhez, sporteseményekhez és vállalati projektekhez.
+            </p>
+            <ul class="service-bullets">
+              <li>Arculattervezés és logórendszer</li>
+              <li>Rendezvényidentitás és kulcsvizuál</li>
+              <li>Színpadi grafikák és háttérelemek</li>
+              <li>Akkreditációs kártyák és belépők</li>
+            </ul>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="service-card" data-tilt>
+            <h3 class="service-title">Print & Offline Design</h3>
+            <div class="card-accent-line"></div>
+            <p class="service-desc">
+              Kiadványok, dekorációk, csomagolások, nyomtatott kommunikációs anyagok és rendezvénygrafikák.
+            </p>
+            <ul class="service-bullets">
+              <li>Katalógusok, prospektusok, magazinok</li>
+              <li>Csomagolástervezés és termékcímkék</li>
+              <li>Nagyformátumú molinók, roll-upok</li>
+              <li>Exkluzív meghívók és különleges papírok</li>
+            </ul>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="service-card" data-tilt>
+            <h3 class="service-title">Digitális & Online Design</h3>
+            <div class="card-accent-line"></div>
+            <p class="service-desc">
+              Online kreatívok, prezentációk és digitális vizuális megjelenések.
+            </p>
+            <ul class="service-bullets">
+              <li>Prezentációk és pitch book sablonok</li>
+              <li>Social media kreatívok és bannerek</li>
+              <li>Digitális kiadványok és lapozható PDF</li>
+              <li>Interaktív képernyőgrafikák</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RÓLAM SECTION -->
+    <section id="rolam" class="section rolam-section">
+      <div class="container rolam-container">
+        <h2 class="section-title serif-title">Rólam</h2>
+        <div class="rolam-layout">
+          <div class="rolam-photo-col">
+            <div class="photo-frame">
+              <img id="rolam-portrait-img" class="portrait-img" alt="Szász Aliz – ÁA Pixel Stúdió" width="600"
+                height="900" loading="lazy" />
+              <div class="photo-glow" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="rolam-text-col">
+
+            <div class="rolam-bio">
+              <p>
+                Több mint húsz éve dolgozom grafikusként, és leginkább azok a projektek inspirálnak, ahol egy teljes
+                vizuális rendszert lehet felépíteni. Rendezvények, sportesemények, vállalati programok vagy kiadványok –
+                számomra ezek nem különálló feladatok, hanem egy közös történet részei.
+              </p>
+              <p>
+                A munkám során a letisztultságra, az átgondolt részletekre és a hosszú távon is működő megoldásokra
+                törekszem. Számomra a jó design nem öncélú – akkor sikeres, ha természetesen támogatja a kommunikációt,
+                és értéket ad a márkának vagy az eseménynek.
+              </p>
+              <p>
+                Szeretem, amikor egy arculat végigkíséri az egész projektet, a meghívótól és programfüzettől kezdve a
+                színpadgrafikán, molinókon és prezentációkon át egészen a legkisebb részletekig. Hiszem, hogy ezek
+                együtt teremtik meg azt az egységes élményt, amelyre a résztvevők később is emlékeznek.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REFERENCIÁK / PROJEKTEK SECTION -->
+    <section id="projektek" class="section projektek-section">
+      <div class="container projektek-header-container">
+        <div class="section-header-simple">
+          <h2 class="section-title serif-title">Projektek</h2>
+          <p class="section-subtitle">Válogatás az elmúlt évek arculati, nyomtatott és rendezvénygrafikai munkáiból</p>
+        </div>
+      </div>
+
+      <!-- The Responsive Grid Container -->
+      <div class="portfolio-grid-wrapper">
+        <div id="portfolio-grid" class="portfolio-grid" role="region" aria-label="Referenciák galériája">
+          <!-- Dynamically populated portfolio items & interactive expander row -->
+        </div>
+      </div>
+    </section>
+
+    <!-- KAPCSOLAT / FOOTER SECTION -->
+    <section id="kapcsolat" class="section footer-section">
+      <div class="container footer-container">
+        <div class="footer-centerpiece">
+          <div class="footer-feather-wrap">
+            <img id="footer-feather-img" class="footer-feather floating-feather" alt="" width="120" height="120" />
+          </div>
+
+          <div class="footer-social-links" aria-label="Közösségi média kapcsolatok">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn facebook"
+              aria-label="Facebook oldal">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                <defs>
+                  <linearGradient id="social-grad-fb" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#e5127d" />
+                    <stop offset="45%" stop-color="#ff6243" />
+                    <stop offset="100%" stop-color="#ffb703" />
+                  </linearGradient>
+                </defs>
+                <rect x="1.5" y="1.5" width="41" height="41" rx="10" ry="10" fill="none" stroke="url(#social-grad-fb)" stroke-width="2" />
+                <path d="M26.8 12c-3.8 0-6.3 2.4-6.3 6.6v3.4h-3.8v4.8h3.8v11.2h5.2V26.8h4.4l.7-4.8h-5.1v-2.9c0-1.3.4-2 2.1-2h3.1V12.3c-.6-.1-2.2-.3-4.1-.3z" fill="url(#social-grad-fb)" />
+              </svg>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn instagram"
+              aria-label="Instagram profil">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                <defs>
+                  <linearGradient id="social-grad-ig" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#e5127d" />
+                    <stop offset="45%" stop-color="#ff6243" />
+                    <stop offset="100%" stop-color="#ffb703" />
+                  </linearGradient>
+                </defs>
+                <rect x="1.5" y="1.5" width="41" height="41" rx="10" ry="10" fill="none" stroke="url(#social-grad-ig)" stroke-width="2" />
+                <circle cx="22" cy="22" r="9.5" fill="none" stroke="url(#social-grad-ig)" stroke-width="2" />
+                <circle cx="31.8" cy="12.2" r="2.9" fill="url(#social-grad-ig)" />
+              </svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn linkedin"
+              aria-label="LinkedIn kapcsolat">
+              <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+                <defs>
+                  <linearGradient id="social-grad-li" x1="0%" y1="100%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#e5127d" />
+                    <stop offset="45%" stop-color="#ff6243" />
+                    <stop offset="100%" stop-color="#ffb703" />
+                  </linearGradient>
+                </defs>
+                <rect x="1.5" y="1.5" width="41" height="41" rx="10" ry="10" fill="none" stroke="url(#social-grad-li)" stroke-width="2" />
+                <circle cx="14" cy="14.2" r="2.9" fill="url(#social-grad-li)" />
+                <rect x="11.6" y="18.8" width="4.8" height="14.2" rx="0.5" fill="url(#social-grad-li)" />
+                <path d="M19.8 18.8h4.7v2c1.2-1.5 3-2.4 5.2-2.4 3.9 0 6 2.4 6 6.4V33h-4.8v-7.3c0-2.1-.8-3.2-2.5-3.2-1.8 0-3 1.2-3.3 2.9V33h-5.3V18.8z" fill="url(#social-grad-li)" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="footer-contact-info">
+            <p class="contact-email">
+              <a href="mailto:info@aapixelstudio.com">info@aapixelstudio.com</a>
+            </p>
+            <p class="contact-loc">Budapest, Magyarország</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom-bar">
+          <p class="copyright">&copy; 2026 ÁA Pixel Stúdió. Minden jog fenntartva.</p>
+          <a href="#hero" class="back-to-top-btn" aria-label="Ugrás az oldal tetejére" title="Vissza a tetejére">
+            <svg width="34" height="18" viewBox="0 0 34 18" fill="none">
+              <defs>
+                <linearGradient id="up-triangle-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#ffb703" />
+                  <stop offset="50%" stop-color="#ff6243" />
+                  <stop offset="100%" stop-color="#e5127d" />
+                </linearGradient>
+              </defs>
+              <polygon points="17,0 34,18 0,18" fill="url(#up-triangle-grad)" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
 </body>
 
 </html>
